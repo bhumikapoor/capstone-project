@@ -246,7 +246,4 @@ npm run dev  # Vite dev server with HMR
 6. Configure Winston for production logging
 7. Set up monitoring for metrics
 
-## License
-
-MIT
 
