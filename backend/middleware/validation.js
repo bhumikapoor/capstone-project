@@ -1,6 +1,5 @@
 const { body, validationResult } = require('express-validator')
 
-// Validation middleware wrapper
 const validate = (validations) => {
   return async (req, res, next) => {
     await Promise.all(validations.map(validation => validation.run(req)))
@@ -15,8 +14,6 @@ const validate = (validations) => {
     next()
   }
 }
-
-// Login validation
 const validateLogin = validate([
   body('username')
     .trim()
@@ -27,8 +24,6 @@ const validateLogin = validate([
     .notEmpty().withMessage('Password is required')
     .isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
 ])
-
-// Post creation validation
 const validatePostCreate = validate([
   body('title')
     .trim()
@@ -41,8 +36,6 @@ const validatePostCreate = validate([
     .isLength({ min: 1, max: 5000 }).withMessage('Content must be between 1 and 5000 characters')
     .escape()
 ])
-
-// Post update validation
 const validatePostUpdate = validate([
   body('title')
     .optional()
@@ -55,8 +48,6 @@ const validatePostUpdate = validate([
     .isLength({ min: 1, max: 5000 }).withMessage('Content must be between 1 and 5000 characters')
     .escape()
 ])
-
-// User creation validation (Admin)
 const validateUserCreate = validate([
   body('username')
     .trim()
